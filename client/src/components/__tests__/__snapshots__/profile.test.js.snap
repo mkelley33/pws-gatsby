@@ -1,0 +1,143 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Profile renders correctly 1`] = `
+Array [
+  <h2>
+    Profile
+  </h2>,
+  <form
+    onSubmit={[Function]}
+  >
+    <div
+      className="form-group"
+    >
+      <label
+        className="sr-only"
+        htmlFor="firstName"
+      >
+        First Name
+      </label>
+      <input
+        className="form-control"
+        id="firstName"
+        onBlur={[Function]}
+        onChange={[Function]}
+        placeholder="First Name"
+        type="text"
+      />
+    </div>
+    <div
+      className="form-group"
+    >
+      <label
+        className="sr-only"
+        htmlFor="lastName"
+      >
+        Last Name
+      </label>
+      <input
+        className="form-control"
+        id="lastName"
+        onBlur={[Function]}
+        onChange={[Function]}
+        placeholder="Last Name"
+        type="text"
+      />
+    </div>
+    <div
+      className="form-group"
+    >
+      <label
+        className="sr-only"
+        htmlFor="email"
+      >
+        Email
+      </label>
+      <input
+        autoComplete="username email"
+        className="form-control"
+        id="email"
+        onBlur={[Function]}
+        onChange={[Function]}
+        placeholder="Email"
+        type="email"
+      />
+    </div>
+    <div
+      className="form-group"
+    >
+      <label
+        className="sr-only"
+        htmlFor="currentPassword"
+      >
+        Current Password
+      </label>
+      <input
+        autoComplete="current-password"
+        className="form-control"
+        id="currentPassword"
+        onBlur={[Function]}
+        onChange={[Function]}
+        placeholder="Current Password"
+        type="password"
+      />
+    </div>
+    <div
+      className="forgotPassword"
+    >
+      <button
+        className="modalLinkButton"
+        onClick={[Function]}
+        type="button"
+      >
+        Forgot Password?
+      </button>
+    </div>
+    <div
+      className="form-group"
+    >
+      <label
+        className="sr-only"
+        htmlFor="password"
+      >
+        New Password
+      </label>
+      <input
+        autoComplete="new-password"
+        className="form-control"
+        id="password"
+        onBlur={[Function]}
+        onChange={[Function]}
+        placeholder="New Password"
+        type="password"
+      />
+    </div>
+    <div
+      className="form-group"
+    >
+      <label
+        className="sr-only"
+        htmlFor="confirmPassword"
+      >
+        Confirm Password
+      </label>
+      <input
+        autoComplete="new-password"
+        className="form-control"
+        id="confirmPassword"
+        onBlur={[Function]}
+        onChange={[Function]}
+        placeholder="Confirm Password"
+        type="password"
+      />
+    </div>
+    <button
+      className="btn btn-primary"
+      disabled={false}
+      type="submit"
+    >
+      Submit
+    </button>
+  </form>,
+]
+`;

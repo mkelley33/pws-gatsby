@@ -1,0 +1,14 @@
+.modalLinkButton {
+  background: none;
+  color: #0275d8;
+  border: 0;
+  outline: none;
+}
+
+.modalLinkButton:hover {
+  text-decoration: underline;
+}
+
+.modalLinkButton:focus {
+  outline: none;
+}

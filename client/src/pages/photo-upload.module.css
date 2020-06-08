@@ -1,0 +1,9 @@
+.dropZone {
+  width: 100%;
+  min-height: 10rem;
+  background: aliceblue;
+  border: 1px solid lightblue;
+  margin: 2rem 0;
+  padding: 2rem;
+  display: flexbox;
+}

@@ -1,0 +1,86 @@
+.container {
+  display: grid;
+  grid-template-columns: 22.5rem auto;
+  min-height: 100vh;
+}
+
+.albumsContainer {
+  border-right: 2px solid rgba(72, 138, 195, 1);
+  margin-right: 3rem;
+  padding-right: 0.33rem;
+  text-align: center;
+}
+
+.albumsHeader {
+  border-bottom: 2px solid rgba(72, 138, 195, 1);
+}
+
+.albumsMenu {
+  padding: 0;
+}
+
+.albumsMenuItem {
+  display: inline;
+  padding: 0.33rem 0.33rem 0.33rem 0;
+}
+
+.albumName {
+  margin-top: -1.25rem;
+}
+
+.addAlbumLink {
+  background-color: aliceblue;
+  border: 1px solid lightblue;
+  max-width: 17.5rem;
+  min-height: 12.5rem;
+  line-height: 12.5rem;
+  text-align: center;
+  font-size: 5rem;
+  margin: 0 auto 1.5rem auto;
+}
+
+.addAlbumLink a,
+.addAlbumLink a:hover {
+  display: block;
+  text-decoration: none;
+}
+
+.thumbsGrid {
+  display: grid;
+  grid-template-columns: 20rem 20rem 20rem;
+  grid-row-gap: 1.5rem;
+}
+
+.albumThumb {
+  width: 17.5rem;
+  cursor: pointer;
+}
+
+.thumb {
+  width: 15rem;
+  display: block;
+  margin: 0 auto;
+}
+
+.thumbContainer {
+  text-align: center;
+}
+
+.deleteButton {
+  margin-top: 0;
+}
+
+.activePage {
+  text-decoration: underline;
+}
+
+.paginationItem {
+  padding: 0 0.33rem;
+}
+
+.disabled {
+  & a {
+    color: #bbb;
+    cursor: not-allowed;
+  }
+}

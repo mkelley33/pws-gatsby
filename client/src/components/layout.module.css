@@ -1,0 +1,100 @@
+:root {
+  --darkGrey: rgba(40, 44, 52, 1);
+  --semiDarkGrey: rgba(54, 60, 71, 1);
+  --mediumGrey: rgba(64, 71, 85, 1);
+  --mediumLightGrey: rgba(104, 107, 112, 1);
+  --lightBlue: #61dafb;
+}
+
+.appHeader {
+  background: linear-gradient(360deg, var(--darkGrey) 0%, var(--semiDarkGrey) 66%, var(--mediumGrey) 100%);
+  color: white;
+  border-bottom: 7px solid var(--mediumGrey);
+  padding-top: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100vw;
+}
+
+.appContent {
+  max-width: 1366px;
+  margin: 0 auto;
+}
+
+.appHeaderLink {
+  margin: 8rem 0.3rem 0.3rem;
+  color: var(--lightBlue);
+  font-size: 0.8rem;
+}
+
+.appHeaderLink:hover {
+  text-decoration: underline;
+  color: var(--lightBlue);
+}
+
+.appHeaderPhoto {
+  background: transparent url('../images/profile-pic.jpg') no-repeat;
+  background-size: cover;
+  width: 5rem;
+  height: 5rem;
+  border: 2px solid var(--lightBlue);
+  border-radius: 50%;
+  margin: 0 auto;
+}
+
+.appHeaderIdentity {
+  margin: 5rem 0 0 -0.15rem;
+  color: var(--lightBlue);
+  font-size: 0.8rem;
+}
+
+.appMenu {
+  list-style-type: none;
+  color: var(--lightBlue);
+  font-size: 0.9rem;
+  height: 5rem;
+  display: flex;
+  align-items: flex-end;
+  margin: 0;
+  padding: 0;
+}
+
+.appMenuItem {
+  padding: 0 1rem;
+  margin-bottom: 0;
+}
+
+.appMenuLink {
+  border-top: 2px solid var(--mediumLightGrey);
+  background: var(--mediumGrey);
+  color: var(--lightBlue);
+  padding: 0.33rem 1rem;
+  display: inline-block;
+  width: 5.5rem;
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.appMenuLink:hover {
+  border-top: 2px solid var(--lightBlue);
+  color: var(--lightBlue);
+}
+
+.appMenuLink:visited {
+  color: var(--lightBlue);
+  text-decoration: none;
+}
+
+.authMenu {
+  float: right;
+  position: relative;
+  top: -1.5rem;
+  left: 7rem;
+  margin-bottom: -1.5rem;
+}
+
+.authMenu li {
+  display: inline;
+}
