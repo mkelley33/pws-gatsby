@@ -14,7 +14,6 @@ describe('Profile', () => {
     expect(tree).toMatchSnapshot();
   });
 
-  // This test should work, but it doesn't for some reason
   it('submits form successfully', () => {
     const { findByLabelText, getByText } = render(<Profile />);
     const firstName = findByLabelText('first name');
