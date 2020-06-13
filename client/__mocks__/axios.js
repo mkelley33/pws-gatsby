@@ -3,6 +3,7 @@ const defaultResponse = { data: {} };
 
 axios.doMockReset = () => {
   Object.assign(axios, {
+    create: jest.fn(() => axios),
     get: jest.fn().mockImplementationOnce(() => Promise.resolve(defaultResponse)),
     put: jest.fn().mockImplementationOnce(() => Promise.resolve(defaultResponse)),
     post: jest.fn().mockImplementationOnce(() => Promise.resolve(defaultResponse)),
