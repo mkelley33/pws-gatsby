@@ -15,6 +15,8 @@ describe('Profile', () => {
   });
 
   it('submits form successfully', () => {
+    // TODO: There's a flaw in this test in that it doesn't validate any of the fields.
+    // In fact, setting the fields has nothing to do with whether test passes or not.
     const { findByLabelText, getByText } = render(<Profile />);
     const firstName = findByLabelText('first name');
     firstName.value = 'Michaux';
@@ -33,4 +35,15 @@ describe('Profile', () => {
       expect(mockAxios.put).toHaveBeenCalledTimes(1);
     });
   });
+
+  // This test should pass, but instead gives error: Unable to find the "window" object for the given node.
+  //
+  // it('validates the first name cannot be blank', () => {
+  //   const { findByLabelText, getByText } = render(<Profile />);
+  //   const firstName = findByLabelText('first name');
+  //   firstName.value = '';
+  //   fireEvent.blur(firstName);
+  //   const error = getByText('First name is required');
+  //   expect(error).not.toBeNull();
+  // });
 });
