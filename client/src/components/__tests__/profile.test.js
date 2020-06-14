@@ -14,26 +14,47 @@ describe('Profile', () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it('submits form successfully', () => {
-    // TODO: There's a flaw in this test in that it doesn't validate any of the fields.
-    // In fact, setting the fields has nothing to do with whether test passes or not.
-    const { findByLabelText, getByText } = render(<Profile />);
-    const firstName = findByLabelText('first name');
-    firstName.value = 'Michaux';
-    const lastName = findByLabelText('last name');
-    lastName.value = 'Kelley';
-    const email = findByLabelText('email');
-    email.value = 'test@test.com';
+  it('submits form successfully', async () => {
+    // Pass a fake user with formik default values for use in mapPropsToValues
+    const user = { userId: 1, firstName: '', lastName: '', email: '' };
+
+    const { getByText, getByLabelText } = render(<Profile user={user} />);
+
+    const firstName = getByLabelText(/first name/i);
+    const lastName = getByLabelText(/last name/i);
+    const email = getByLabelText(/email/i);
     const submit = getByText('Submit');
 
-    // No need to add mockImplementationOnce,
-    // we're doing it directly inside the custom mock file
+    await waitFor(() => {
+      fireEvent.change(firstName, {
+        target: {
+          value: "Michaux"
+        }
+      });
+    });
+
+    await waitFor(() => {
+      fireEvent.change(lastName, {
+        target: {
+          value: "Kelley"
+        }
+      });
+    });
+
+    await waitFor(() => {
+      fireEvent.change(email, {
+        target: {
+          value: "test@test.com"
+        }
+      });
+    });
 
     fireEvent.click(submit);
 
-    waitFor(() => {
+    await waitFor(() => {
       expect(mockAxios.put).toHaveBeenCalledTimes(1);
-    });
+    })
+
   });
 
   // This test should pass, but instead gives error: Unable to find the "window" object for the given node.
