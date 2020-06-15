@@ -33,8 +33,14 @@ const formikEnhancer = withFormik({
       ),
     confirmPassword: Yup.string().oneOf([Yup.ref('password'), null], 'Passwords must match'),
   }),
+  validate: (values) => {
+    console.log('Formik fn:validate with values:', values);
+  },
   handleSubmit: (payload, { setSubmitting, setErrors, props }) => {
     // TODO: consider putting user in local storage
+
+    console.log('Formik fn:handleSubmit with:', props, payload);
+
     const { user } = props;
     api
       .put(`/users/${user.userId}`, payload, {
