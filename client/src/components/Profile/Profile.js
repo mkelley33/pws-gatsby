@@ -15,15 +15,9 @@ import Modal from '@components/Modal/Modal';
 
 const formikEnhancer = withFormik({
   validationSchema: Yup.object().shape({
-    firstName: Yup.string()
-      .min(2, "C'mon, your first name is longer than that")
-      .required('First name is required'),
-    lastName: Yup.string()
-      .min(2, "C'mon, your last name is longer than that")
-      .required('Last name is required'),
-    email: Yup.string()
-      .email('Invalid email address')
-      .required('Email is required'),
+    firstName: Yup.string().min(2, "C'mon, your first name is longer than that").required('First name is required'),
+    lastName: Yup.string().min(2, "C'mon, your last name is longer than that").required('Last name is required'),
+    email: Yup.string().email('Invalid email address').required('Email is required'),
     currentPassword: Yup.string(),
     password: Yup.string()
       .min(8, 'Password has to be at least 8 characters!')
@@ -33,26 +27,20 @@ const formikEnhancer = withFormik({
       ),
     confirmPassword: Yup.string().oneOf([Yup.ref('password'), null], 'Passwords must match'),
   }),
-  validate: (values) => {
-    console.log('Formik fn:validate with values:', values);
-  },
   handleSubmit: (payload, { setSubmitting, setErrors, props }) => {
     // TODO: consider putting user in local storage
-
-    console.log('Formik fn:handleSubmit with:', props, payload);
-
     const { user } = props;
     api
       .put(`/users/${user.userId}`, payload, {
         withCredentials: true,
       })
-      .then(res => {
+      .then((res) => {
         toast.success('Your user profile was updated successfully', {
           position: toast.POSITION.TOP_CENTER,
           hideProgressBar: true,
         });
       })
-      .catch(err => {
+      .catch((err) => {
         toast.error('Something went wrong', {
           position: toast.POSITION.TOP_CENTER,
           hideProgressBar: true,
@@ -71,7 +59,7 @@ class Profile extends Component {
     triggerText: 'Forgot Password?',
   };
 
-  modalContent = <ForgotPassword user={{ email: '' }} {...this.props} />;
+  modalContent = (<ForgotPassword user={{ email: '' }} {...this.props} />);
 
   render() {
     document.title = 'User Profile';

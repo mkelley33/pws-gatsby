@@ -28,24 +28,24 @@ describe('Profile', () => {
     await waitFor(() => {
       fireEvent.change(firstName, {
         target: {
-          value: "Michaux"
-        }
+          value: 'Michaux',
+        },
       });
     });
 
     await waitFor(() => {
       fireEvent.change(lastName, {
         target: {
-          value: "Kelley"
-        }
+          value: 'Kelley',
+        },
       });
     });
 
     await waitFor(() => {
       fireEvent.change(email, {
         target: {
-          value: "test@test.com"
-        }
+          value: 'test@test.com',
+        },
       });
     });
 
@@ -53,8 +53,7 @@ describe('Profile', () => {
 
     await waitFor(() => {
       expect(mockAxios.put).toHaveBeenCalledTimes(1);
-    })
-
+    });
   });
 
   // This test should pass, but instead gives error: Unable to find the "window" object for the given node.
