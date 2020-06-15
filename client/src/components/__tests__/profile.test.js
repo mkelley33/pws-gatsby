@@ -56,14 +56,69 @@ describe('Profile', () => {
     });
   });
 
-  // This test should pass, but instead gives error: Unable to find the "window" object for the given node.
-  //
-  // it('validates the first name cannot be blank', () => {
-  //   const { findByLabelText, getByText } = render(<Profile />);
-  //   const firstName = findByLabelText('first name');
-  //   firstName.value = '';
-  //   fireEvent.blur(firstName);
-  //   const error = getByText('First name is required');
-  //   expect(error).not.toBeNull();
-  // });
+  it('validates the first name cannot be blank', async () => {
+    const { getByLabelText, getByText } = render(<Profile />);
+    const firstName = getByLabelText(/first name/i);
+
+    await waitFor(() => {
+      fireEvent.change(firstName, {
+        target: {
+          value: '',
+        },
+      });
+    });
+
+    fireEvent.blur(firstName);
+
+    let error;
+    await waitFor(() => {
+      error = getByText('First name is required');
+    });
+
+    expect(error).not.toBeNull();
+  });
+
+  it('validates the last name cannot be blank', async () => {
+    const { getByLabelText, getByText } = render(<Profile />);
+    const lastName = getByLabelText(/last name/i);
+
+    await waitFor(() => {
+      fireEvent.change(lastName, {
+        target: {
+          value: '',
+        },
+      });
+    });
+
+    fireEvent.blur(lastName);
+
+    let error;
+    await waitFor(() => {
+      error = getByText('Last name is required');
+    });
+
+    expect(error).not.toBeNull();
+  });
+
+  it('validates email cannot be blank', async () => {
+    const { getByLabelText, getByText } = render(<Profile />);
+    const email = getByLabelText(/email/i);
+
+    await waitFor(() => {
+      fireEvent.change(email, {
+        target: {
+          value: '',
+        },
+      });
+    });
+
+    fireEvent.blur(email);
+
+    let error;
+    await waitFor(() => {
+      error = getByText('Email is required');
+    });
+
+    expect(error).not.toBeNull();
+  });
 });
