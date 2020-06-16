@@ -1,5 +1,5 @@
 import React from 'react';
-import renderer, { act } from 'react-test-renderer';
+import renderer from 'react-test-renderer';
 import { render, fireEvent, waitFor } from '@testing-library/react';
 import mockAxios from 'axios';
 import Profile from '../Profile/Profile';
