@@ -29,6 +29,12 @@ exports.onCreatePage = async ({ page, actions }) => {
     // Update the page.
     createPage(page);
   }
+
+  if (page.path.match(/^\/reset-password/)) {
+    page.matchPath = `/reset-password/:token`;
+    // Update the page.
+    createPage(page);
+  }
 };
 
 exports.createPages = async ({ graphql, actions }) => {
