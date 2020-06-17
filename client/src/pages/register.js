@@ -7,18 +7,11 @@ import TextInput from '@components/common/forms/TextInput';
 import api from '../api';
 import Layout from '@components/layout';
 
-// TODO: Fix password complexity challenge and show error if not met.
 const formikEnhancer = withFormik({
   validationSchema: Yup.object().shape({
-    firstName: Yup.string()
-      .min(2, "C'mon, your name is longer than that")
-      .required('First name is required.'),
-    lastName: Yup.string()
-      .min(2, "C'mon, your name is longer than that")
-      .required('Last name is required.'),
-    email: Yup.string()
-      .email('Invalid email address')
-      .required('Email is required!'),
+    firstName: Yup.string().min(2, "C'mon, your name is longer than that").required('First name is required.'),
+    lastName: Yup.string().min(2, "C'mon, your name is longer than that").required('Last name is required.'),
+    email: Yup.string().email('Invalid email address').required('Email is required!'),
     password: Yup.string()
       .min(8, 'Password has to be at least 8 characters!')
       .matches(
@@ -40,10 +33,10 @@ const formikEnhancer = withFormik({
   handleSubmit: (payload, { setSubmitting, setErrors, props }) => {
     api
       .post('/users', payload)
-      .then(res => {
+      .then((res) => {
         navigate('/post-registration');
       })
-      .catch(err => {
+      .catch((err) => {
         // Right now this assumes the only back-end error would be duplicate e-mail, and it would, but this should be
         // handled differently, see below.
         // TODO: make API give back error message in JSON instead of a 500 with HTML
@@ -56,7 +49,7 @@ const formikEnhancer = withFormik({
   displayName: 'RegistrationForm',
 });
 
-const RegistrationForm = props => {
+const RegistrationForm = (props) => {
   document.title = 'Registration Form';
   const { values, touched, errors, dirty, handleChange, handleBlur, handleSubmit, handleReset, isSubmitting } = props;
   console.log(errors);
