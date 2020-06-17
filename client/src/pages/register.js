@@ -52,7 +52,7 @@ const formikEnhancer = withFormik({
 const RegistrationForm = (props) => {
   document.title = 'Registration Form';
   const { values, touched, errors, dirty, handleChange, handleBlur, handleSubmit, handleReset, isSubmitting } = props;
-  console.log(errors);
+
   return (
     <Layout>
       <h2>Registration Form</h2>
