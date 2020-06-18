@@ -25,7 +25,7 @@ class DefaultLayout extends Component {
           <nav>
             <ul className={styles.appMenu}>
               <li className={styles.appMenuItem}>
-                <Link className={styles.appMenuLink} to="/about">
+                <Link className={styles.appMenuLink} to="/">
                   About
                 </Link>
               </li>
@@ -80,7 +80,7 @@ class DefaultLayout extends Component {
           </nav>
         </header>
         <ToastContainer />
-        <div className={styles.appContent}>{this.props.children}</div>
+        <main className={styles.appContent}>{this.props.children}</main>
       </React.Fragment>
     );
   }

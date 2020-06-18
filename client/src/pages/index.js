@@ -3,10 +3,16 @@ import Layout from '@components/layout';
 
 export default () => (
   <Layout>
-    <h1>Hi! I'm building a fake Gatsby site as part of a tutorial!</h1>
-    <p>
-      What do I like to do? Lots of course but definitely enjoy building
-      websites.
-    </p>
+    <section>
+      <h1>About me</h1>
+      <p>
+        My name's Michaux Kelley. I’m a software developer, modern dude, natural-born-world-shaker, aspiring
+        lepidopterist, philatelist, punk, writer, poet, and JavaScript hacker.
+      </p>
+      <p>
+        I've been in software development for about fifteen years now and have coded everything from full stack to more
+        recently as a full-on front-end engineer. What can I say? I love to code!
+      </p>
+    </section>
   </Layout>
 );
