@@ -2,6 +2,7 @@ import React from 'react';
 import { graphql, Link } from 'gatsby';
 
 import Layout from '@components/layout';
+import styles from './blog.module.css';
 
 export default ({ data, pageContext }) => {
   const { currentPage, isFirstPage, isLastPage, totalPages } = pageContext;
@@ -13,9 +14,9 @@ export default ({ data, pageContext }) => {
       <h1>Blog Posts</h1>
       {data.allMarkdownRemark.edges.map(({ node }) => (
         <div key={node.id}>
-          <h3>
+          <h2 className={styles.blogPostsHeading}>
             <Link to={`/posts${node.fields.slug}`}>{node.frontmatter.title}</Link> - {node.frontmatter.date}
-          </h3>
+          </h2>
           <p>{node.excerpt}</p>
         </div>
       ))}
