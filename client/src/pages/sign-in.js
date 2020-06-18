@@ -13,9 +13,7 @@ import Layout from '@components/layout';
 
 const formikEnhancer = withFormik({
   validationSchema: Yup.object().shape({
-    email: Yup.string()
-      .email('Invalid email address')
-      .required('Email is required!'),
+    email: Yup.string().email('Invalid email address').required('Email is required!'),
     password: Yup.string().required('Password is required'),
   }),
   handleSubmit: async (payload, { setSubmitting, setErrors, props }) => {
@@ -33,7 +31,7 @@ const formikEnhancer = withFormik({
   displayName: 'SignInForm',
 });
 
-const SignIn = props => {
+const SignIn = (props) => {
   document.title = 'Sign In';
   const { values, touched, errors, dirty, handleChange, handleBlur, handleSubmit, isSubmitting } = props;
 
@@ -45,7 +43,7 @@ const SignIn = props => {
 
   return (
     <Layout>
-      <h2>Sign In</h2>
+      <h1>Sign In</h1>
       <form onSubmit={handleSubmit}>
         <TextInput
           id="email"
@@ -89,7 +87,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  { signInUser }
-)(formikEnhancer(SignIn));
+export default connect(mapStateToProps, { signInUser })(formikEnhancer(SignIn));

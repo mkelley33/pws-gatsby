@@ -6,18 +6,15 @@ import Layout from '@components/layout';
 export default ({ data, pageContext }) => {
   const { currentPage, isFirstPage, isLastPage, totalPages } = pageContext;
   const nextPage = `/blog/${String(currentPage + 1)}`;
-  const prevPage =
-    currentPage - 1 === 1 ? '/blog' : `/blog/${String(currentPage - 1)}`;
+  const prevPage = currentPage - 1 === 1 ? '/blog' : `/blog/${String(currentPage - 1)}`;
+  document.title = 'Blog Posts';
   return (
     <Layout>
-      <h2>Blog Posts</h2>
+      <h1>Blog Posts</h1>
       {data.allMarkdownRemark.edges.map(({ node }) => (
         <div key={node.id}>
           <h3>
-            <Link to={`/posts${node.fields.slug}`}>
-              {node.frontmatter.title}
-            </Link>{' '}
-            - {node.frontmatter.date}
+            <Link to={`/posts${node.fields.slug}`}>{node.frontmatter.title}</Link> - {node.frontmatter.date}
           </h3>
           <p>{node.excerpt}</p>
         </div>
@@ -45,11 +42,7 @@ export default ({ data, pageContext }) => {
 
 export const query = graphql`
   query($skip: Int!, $limit: Int!) {
-    allMarkdownRemark(
-      skip: $skip
-      limit: $limit
-      sort: { order: DESC, fields: [frontmatter___date] }
-    ) {
+    allMarkdownRemark(skip: $skip, limit: $limit, sort: { order: DESC, fields: [frontmatter___date] }) {
       totalCount
       edges {
         node {

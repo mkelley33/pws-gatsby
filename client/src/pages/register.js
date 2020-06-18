@@ -55,7 +55,7 @@ const RegistrationForm = (props) => {
 
   return (
     <Layout>
-      <h2>Registration Form</h2>
+      <h1>Registration Form</h1>
       <form onSubmit={handleSubmit}>
         <TextInput
           id="firstName"

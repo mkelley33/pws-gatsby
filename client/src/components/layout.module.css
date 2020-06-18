@@ -6,6 +6,15 @@
   --lightBlue: #61dafb;
 }
 
+h1,
+p {
+  color: var(--mediumGrey);
+}
+
+h1 {
+  border-bottom: 1px solid var(--lightBlue);
+}
+
 .appHeader {
   background: linear-gradient(360deg, var(--darkGrey) 0%, var(--semiDarkGrey) 66%, var(--mediumGrey) 100%);
   color: white;
