@@ -58,9 +58,13 @@ const ContactForm = props => {
     script.async = true;
     script.defer = true;
     window.onSubmit = token => {
-      setFieldValue('recaptcha', token);
-      // TODO: verify against server
-      console.log('verify against server');
+      api.post('/recaptcha', { token }).then(res => {
+        if (res.data.error) {
+          setFieldValue('recaptcha', '');
+        } else {
+          setFieldValue('recaptcha', token);
+        }
+      });
     };
     window.onExpired = () => setFieldValue('recaptcha', '');
     document.body.appendChild(script);

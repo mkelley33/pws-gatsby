@@ -3,6 +3,13 @@ import util from 'util';
 import config from './config/env';
 import app from './config/express';
 import debugging from 'debug';
+import dotenv from 'dotenv';
+
+if (config.env === 'development') {
+  dotenv.config({ path: './.env.development' });
+} else {
+  dotenv.config({ path: './.env' });
+}
 
 const debug = debugging('index');
 

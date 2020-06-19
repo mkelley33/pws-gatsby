@@ -3,6 +3,7 @@ import userRoutes from './user.route';
 import authRoutes from './auth.route';
 import photoRoutes from './photo.route';
 import photoAlbumRoutes from './photo-albums.route';
+import recaptchaRoutes from './recaptcha.route';
 
 const router = express.Router(); // eslint-disable-line new-cap
 
@@ -10,12 +11,13 @@ router.use('/auth', authRoutes);
 router.use('/users', userRoutes);
 router.use('/photos', photoRoutes);
 router.use('/photo-albums', photoAlbumRoutes);
+router.use('/recaptcha', recaptchaRoutes);
 
 // Source: https://github.com/gothinkster/node-express-realworld-example-app/blob/master/routes/api/index.js
-router.use(function(err, req, res, next) {
+router.use(function (err, req, res, next) {
   if (err.name === 'ValidationError') {
     return res.status(422).json({
-      errors: Object.keys(err.errors).reduce(function(errors, key) {
+      errors: Object.keys(err.errors).reduce(function (errors, key) {
         errors[key] = err.errors[key].message;
         return errors;
       }, {}),
