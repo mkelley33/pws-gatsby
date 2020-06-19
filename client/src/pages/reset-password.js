@@ -25,7 +25,7 @@ const formikEnhancer = withFormik({
     confirmPassword: '',
   }),
   handleSubmit: (payload, { setSubmitting, setErrors, props }) => {
-    api.post('/auth/reset-password', Object.assign(payload, { token: props.token })).then((res) => {
+    api.post('/auth/reset-password', Object.assign(payload, { token: props.token })).then(res => {
       navigate('/post-reset-password');
     });
     setSubmitting(false);
@@ -33,9 +33,9 @@ const formikEnhancer = withFormik({
   displayName: 'ResetPasswordForm',
 });
 
-const ResetPasswordForm = (props) => {
+const ResetPasswordForm = props => {
   document.title = 'Reset Password Form';
-  const { values, touched, errors, dirty, handleChange, handleBlur, handleSubmit, handleReset, isSubmitting } = props;
+  const { values, touched, errors, dirty, handleChange, handleBlur, handleSubmit, isSubmitting } = props;
 
   return (
     <Layout>
