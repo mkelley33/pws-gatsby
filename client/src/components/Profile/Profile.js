@@ -27,7 +27,7 @@ const formikEnhancer = withFormik({
       ),
     confirmPassword: Yup.string().oneOf([Yup.ref('password'), null], 'Passwords must match'),
   }),
-  handleSubmit: (payload, { setSubmitting, setErrors, props }) => {
+  handleSubmit: (payload, { setSubmitting, props }) => {
     // TODO: consider putting user in local storage
     const { user } = props;
     api
