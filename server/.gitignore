@@ -1,1 +1,4 @@
 public/images
+
+.env
+.env.development
