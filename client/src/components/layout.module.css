@@ -113,6 +113,7 @@ h1 {
     display: block;
     width: 100vw;
     padding-top: 0.25rem;
+    height: 7.5rem;
   }
 
   .appContent {
@@ -129,6 +130,7 @@ h1 {
 
   .authMenu {
     left: 0;
+    margin-top: 3.75rem;
     margin-right: 1rem;
   }
 
@@ -141,7 +143,7 @@ h1 {
     position: relative;
     font-size: 2rem;
     left: 7rem;
-    top: -9rem;
+    top: -5rem;
     margin-bottom: -7rem;
   }
 }
