@@ -6,10 +6,10 @@ import Layout from '@components/layout';
 const PostForgotPassword = () => {
   return (
     <Layout>
-      <h2>E-mail Sent</h2>
+      <h1>E-mail Sent</h1>
       <p>
-        Check your e-mail for a reset password link. Then{' '}
-        <Link to="/sign-in">sign in</Link> with your e-mail and password.
+        Check your e-mail for a reset password link. Then <Link to="/sign-in">sign in</Link> with your e-mail and
+        password.
       </p>
     </Layout>
   );

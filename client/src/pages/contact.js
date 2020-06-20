@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { withFormik } from 'formik';
 import * as Yup from 'yup';
 import { toast } from 'react-toastify';
+import { navigate } from 'gatsby';
 
 import Layout from '@components/layout';
 import api from '../api';
@@ -22,10 +23,7 @@ const formikEnhancer = withFormik({
         withCredentials: true,
       })
       .then(res => {
-        toast.success('Your message has been sent', {
-          position: toast.POSITION.TOP_CENTER,
-          hideProgressBar: true,
-        });
+        navigate('/post-contact');
       })
       .catch(err => {
         toast.error('Something went wrong', {
@@ -51,6 +49,7 @@ const ContactForm = props => {
   document.title = 'Contact Form';
   const { values, touched, errors, handleChange, handleBlur, handleSubmit, isSubmitting, setFieldValue } = props;
 
+  /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
     const script = document.createElement('script');
     script.src = 'https://www.google.com/recaptcha/api.js';
@@ -68,6 +67,7 @@ const ContactForm = props => {
     window.onExpired = () => setFieldValue('recaptcha', '');
     document.body.appendChild(script);
   }, []);
+  /* eslint-enable react-hooks/exhaustive-deps */
 
   return (
     <Layout>
@@ -106,9 +106,12 @@ const ContactForm = props => {
             id="message"
             label="Message"
             error={touched.message && errors.message}
-            placeholder="Message"
-            rows={10}
+            value={values.message}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            rows={6}
           />
+          {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
           <input id="recaptcha" name="recaptcha" type="hidden" ref={tokenEl} value="" />
           <div className="form-group">
             <div
