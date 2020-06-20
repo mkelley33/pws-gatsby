@@ -17,9 +17,8 @@ const formikEnhancer = withFormik({
     recaptcha: Yup.string().required(),
   }),
   handleSubmit: (payload, { setSubmitting }) => {
-    console.log('payload', payload);
     api
-      .put(`/contact`, payload, {
+      .post(`/contact`, payload, {
         withCredentials: true,
       })
       .then(res => {
@@ -105,12 +104,9 @@ const ContactForm = props => {
           />
           <TextArea
             id="message"
-            type="text"
             label="Message"
             error={touched.message && errors.message}
-            value={values.message}
-            onChange={handleChange}
-            onBlur={handleBlur}
+            placeholder="Message"
             rows={10}
           />
           <input id="recaptcha" name="recaptcha" type="hidden" ref={tokenEl} value="" />

@@ -4,6 +4,7 @@ import authRoutes from './auth.route';
 import photoRoutes from './photo.route';
 import photoAlbumRoutes from './photo-albums.route';
 import recaptchaRoutes from './recaptcha.route';
+import contactRoutes from './contact.route';
 
 const router = express.Router(); // eslint-disable-line new-cap
 
@@ -12,6 +13,7 @@ router.use('/users', userRoutes);
 router.use('/photos', photoRoutes);
 router.use('/photo-albums', photoAlbumRoutes);
 router.use('/recaptcha', recaptchaRoutes);
+router.use('/contact', contactRoutes);
 
 // Source: https://github.com/gothinkster/node-express-realworld-example-app/blob/master/routes/api/index.js
 router.use(function (err, req, res, next) {

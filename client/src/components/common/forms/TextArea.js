@@ -1,10 +1,13 @@
 import React from 'react';
 import classnames from 'classnames';
+import { useField } from 'formik';
 
 import Label from './Label';
 import InputFeedback from './InputFeedback';
 
-const TextArea = ({ type, id, label, error, value, onChange, className, ...props }) => {
+const TextArea = ({ label, className, error, ...props }) => {
+  const [field, meta] = useField(props);
+
   const classes = classnames(
     'form-group',
     {
@@ -17,15 +20,7 @@ const TextArea = ({ type, id, label, error, value, onChange, className, ...props
       <Label className="sr-only" htmlFor={id} error={error}>
         {label}
       </Label>
-      <textarea
-        id={id}
-        className="form-control"
-        type={type}
-        value={value}
-        onChange={onChange}
-        placeholder={label}
-        {...props}
-      />
+      <textarea className="form-control" {...field} {...props} />
       <InputFeedback error={error} />
     </div>
   );
