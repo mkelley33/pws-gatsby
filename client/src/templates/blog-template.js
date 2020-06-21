@@ -26,11 +26,12 @@ export default ({ data, pageContext }) => {
             Prev Page
           </Link>
         )}
-        {Array.from({ length: totalPages }, (_, index) => (
-          <Link key={index} to={`/blog/${index === 0 ? '' : index + 1}`}>
-            {index + 1}
-          </Link>
-        ))}
+        {totalPages !== 1 &&
+          Array.from({ length: totalPages }, (_, index) => (
+            <Link key={index} to={`/blog/${index === 0 ? '' : index + 1}`}>
+              {index + 1}
+            </Link>
+          ))}
         {!isLastPage && (
           <Link to={nextPage} rel="next">
             Next page
