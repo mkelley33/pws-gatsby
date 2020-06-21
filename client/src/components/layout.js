@@ -4,6 +4,8 @@ import { ToastContainer } from 'react-toastify';
 import { connect } from 'react-redux';
 import { Link } from 'gatsby';
 
+import BurgerMenu from '@components/BurgerMenu/BurgerMenu';
+
 import 'react-toastify/dist/ReactToastify.min.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import './main.css';
@@ -19,6 +21,7 @@ class DefaultLayout extends Component {
     return (
       <React.Fragment>
         <header className={styles.appHeader}>
+          <BurgerMenu />
           <div className={styles.appHeaderPhoto}></div>
           <div className={styles.appHeaderIdentity}>@mkelley33</div>
           <nav>
