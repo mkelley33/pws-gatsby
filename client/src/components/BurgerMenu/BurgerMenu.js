@@ -6,9 +6,8 @@ const BurgerMenu = () => (
   <Menu right>
     <Link to="/">About</Link>
     <Link to="/blog">Blog</Link>
-    <Link to="/resume">Resume</Link>
     <Link to="/contact">Contact</Link>
-    <Link to="/photos">Photos</Link>
+    {/* <Link to="/photos">Photos</Link> */}
   </Menu>
 );
 

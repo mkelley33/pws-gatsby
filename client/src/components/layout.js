@@ -37,11 +37,6 @@ class DefaultLayout extends Component {
                 </Link>
               </li>
               <li className={styles.appMenuItem}>
-                <Link className={styles.appMenuLink} to="/resume">
-                  Resume
-                </Link>
-              </li>
-              <li className={styles.appMenuItem}>
                 <Link className={styles.appMenuLink} to="/contact">
                   Contact
                 </Link>
