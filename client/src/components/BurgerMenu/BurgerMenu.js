@@ -7,6 +7,7 @@ const BurgerMenu = () => (
     <Link to="/">About</Link>
     <Link to="/blog">Blog</Link>
     <Link to="/contact">Contact</Link>
+    {/* TODO: fix layout of photos on mobile */}
     {/* <Link to="/photos">Photos</Link> */}
   </Menu>
 );
