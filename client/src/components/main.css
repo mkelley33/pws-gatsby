@@ -38,6 +38,12 @@
   animation-name: shake;
 }
 
+@media screen and (min-width: 1024px) {
+  .bm-burger-button {
+    display: none;
+  }
+}
+
 /* Position and sizing of burger button */
 .bm-burger-button {
   position: fixed;
