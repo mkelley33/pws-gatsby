@@ -44,8 +44,6 @@ const formikEnhancer = withFormik({
 });
 
 const ContactForm = props => {
-  const tokenEl = useRef(null);
-
   document.title = 'Contact Form';
   const { values, touched, errors, handleChange, handleBlur, handleSubmit, isSubmitting, setFieldValue } = props;
 
@@ -112,7 +110,7 @@ const ContactForm = props => {
             rows={6}
           />
           {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-          <input id="recaptcha" name="recaptcha" type="hidden" ref={tokenEl} value="" />
+          <input id="recaptcha" name="recaptcha" type="hidden" value="" />
           <div className="form-group">
             <div
               className="g-recaptcha"
