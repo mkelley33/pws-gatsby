@@ -4,12 +4,12 @@
   "description": "",
   "main": "index.js",
   "engines": {
-    "node": ">=10.15.1"
+    "node": "10.15.1"
   },
   "scripts": {
     "dev": "nodemon --exec babel-node index.js",
     "build": "node scripts/build.js",
-    "start": "node dist/index.js",
+    "start": "export NODE_ENV=production && node dist/index.js",
     "test": "./node_modules/.bin/mocha --require @babel/register --require test/helpers --reporter spec test/**/*.js"
   },
   "author": "Michaux Kelley",

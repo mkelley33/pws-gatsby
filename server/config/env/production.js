@@ -1,7 +1,10 @@
+import dotenv from 'dotenv';
+dotenv.config({ path: './.env' });
+
 export default {
   host: process.env.HOST,
   env: 'production',
-  protocol: 'https',
+  protocol: 'http',
   mail: {
     user: 'michauxkelley@gmail.com',
     pass: process.env.EMAIL_PASS,
@@ -21,5 +24,5 @@ export default {
       pass: process.env.PWS_PASS,
     },
   },
-  port: 443,
+  port: 80,
 };
