@@ -26,9 +26,7 @@ export const signInUser = ({ email, password }) => async dispatch => {
   navigate('/');
 };
 
-export function signOutUser() {
-  return function(dispatch) {
-    // TODO: remove auth cookie on signout.
-    dispatch({ type: UNAUTH_USER });
-  };
-}
+export const signOutUser = () => async dispatch => {
+  await api.post('/auth/signout');
+  dispatch({ type: UNAUTH_USER });
+};

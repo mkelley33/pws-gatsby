@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { navigate } from 'gatsby';
 import { connect } from 'react-redux';
-
 import api from '../api';
 import { signOutUser } from '../actions';
 
@@ -28,10 +27,7 @@ const withAuthentication = WrappedComponent => {
       return <WrappedComponent isAuthenticated={this.state.isAuthenticated} />;
     }
   }
-  return connect(
-    null,
-    { signOutUser }
-  )(HOC);
+  return connect(null, { signOutUser })(HOC);
 };
 
 export default withAuthentication;

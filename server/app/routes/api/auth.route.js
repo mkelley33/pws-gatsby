@@ -63,4 +63,19 @@ router.route('/forgot-password').post(authCtrl.forgotPassword);
  */
 router.route('/reset-password').post(authCtrl.resetPassword);
 
+/**
+ * @swagger
+ * /api/auth/signout:
+ *  post:
+ *    tags:
+ *      - Auth
+ *    description: Removes authentication cookie
+ *    produces:
+ *      - application/json
+ *    responses:
+ *      200:
+ *        description: A successful response.
+ */
+router.route('/signout').post(authCtrl.signout);
+
 export default router;

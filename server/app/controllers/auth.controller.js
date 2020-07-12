@@ -58,6 +58,11 @@ function signin(req, res, next) {
     .catch(e => next(e));
 }
 
+function signout(req, res) {
+  res.clearCookie('token');
+  res.json({ success: true });
+}
+
 function sendResetPasswordEmail(user, token) {
   const transporter = nodeMailer.createTransport({
     host: 'smtp.gmail.com',
@@ -122,4 +127,4 @@ function resetPassword(req, res, next) {
   });
 }
 
-export default { signin, forgotPassword, resetPassword, isAuthenticated };
+export default { signin, signout, forgotPassword, resetPassword, isAuthenticated };
