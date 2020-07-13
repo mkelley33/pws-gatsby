@@ -80,6 +80,21 @@ class Profile extends Component {
     }
   };
 
+  isAllChecked = () => {
+    const inputs = document.getElementsByTagName('input');
+    const ids = { admin: 0, user: 1, family: 2, friend: 3 };
+    let isAllChecked = false;
+    for (const input of inputs) {
+      if (Object.keys(ids).includes(input.id)) {
+        isAllChecked = input.checked;
+        if (!isAllChecked) {
+          break;
+        }
+      }
+    }
+    return isAllChecked;
+  };
+
   render() {
     document.title = 'User Profile';
     const {
@@ -167,7 +182,12 @@ class Profile extends Component {
           {isAdmin && (
             <React.Fragment>
               <h3>Roles</h3>
-              <input id="selectAll" type="checkbox" onChange={() => this.handleCheckAll(setFieldValue)} />{' '}
+              <input
+                id="selectAll"
+                type="checkbox"
+                checked={this.isAllChecked()}
+                onChange={() => this.handleCheckAll(setFieldValue)}
+              />{' '}
               <label htmlFor="selectAll">Select all</label>
               <CheckboxGroup
                 id="roles"
