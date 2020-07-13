@@ -26,7 +26,7 @@ export default class ProfileContainer extends Component {
     if (!this.state.user.email) return null;
     return (
       <Layout>
-        <Profile isAdmin={this.props.isAdmin} user={this.state.user} {...this.props} />
+        <Profile isAdmin={this.state.user.roles.includes('admin')} user={this.state.user} {...this.props} />
       </Layout>
     );
   }

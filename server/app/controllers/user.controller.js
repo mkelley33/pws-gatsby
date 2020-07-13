@@ -115,7 +115,13 @@ function getProfile(req, res, next) {
     }
     const { userId } = decoded;
     const user = await User.findById(userId).exec();
-    res.json({ firstName: user.firstName, lastName: user.lastName, email: user.email, userId: user._id });
+    res.json({
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      userId: user._id,
+      roles: user.roles,
+    });
   });
 }
 
@@ -152,7 +158,7 @@ function update(req, res, next) {
           }
         });
       }
-      if (res.locals.authorizedData.roles.includes(ROLE_ADMIN)) {
+      if (user.roles.includes(ROLE_ADMIN)) {
         updateUser(Object.assign(user, { firstName, lastName, email, roles }), errors, req, res, next);
       } else {
         updateUser(Object.assign(user, { firstName, lastName, email }), errors, req, res, next);

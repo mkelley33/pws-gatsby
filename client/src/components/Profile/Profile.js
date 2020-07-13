@@ -3,6 +3,7 @@ import { withFormik } from 'formik';
 import { toast } from 'react-toastify';
 import { Field } from 'formik';
 import * as Yup from 'yup';
+import compact from 'lodash/compact';
 
 import api from '../../api';
 import TextInput from '@components/common/forms/TextInput';
@@ -30,17 +31,18 @@ const formikEnhancer = withFormik({
   handleSubmit: (payload, { setSubmitting, props }) => {
     // TODO: consider putting user in local storage
     const { user } = props;
+    payload.roles = compact(payload.roles);
     api
       .put(`/users/${user.userId}`, payload, {
         withCredentials: true,
       })
-      .then((res) => {
+      .then(res => {
         toast.success('Your user profile was updated successfully', {
           position: toast.POSITION.TOP_CENTER,
           hideProgressBar: true,
         });
       })
-      .catch((err) => {
+      .catch(err => {
         toast.error('Something went wrong', {
           position: toast.POSITION.TOP_CENTER,
           hideProgressBar: true,
@@ -60,6 +62,23 @@ class Profile extends Component {
   };
 
   modalContent = (<ForgotPassword user={{ email: '' }} {...this.props} />);
+
+  handleCheckAll = setFieldValue => {
+    const inputs = document.getElementsByTagName('input');
+    const selectAll = document.querySelector('#selectAll');
+    const ids = { admin: 0, user: 1, family: 2, friend: 3 };
+    for (const input of inputs) {
+      if (Object.keys(ids).includes(input.id)) {
+        if (selectAll.checked) {
+          input.checked = true;
+          setFieldValue(`roles[${ids[input.id]}]`, input.value);
+        } else {
+          input.checked = false;
+          setFieldValue(`roles[${ids[input.id]}]`, '');
+        }
+      }
+    }
+  };
 
   render() {
     document.title = 'User Profile';
@@ -148,6 +167,8 @@ class Profile extends Component {
           {isAdmin && (
             <React.Fragment>
               <h3>Roles</h3>
+              <input id="selectAll" type="checkbox" onChange={() => this.handleCheckAll(setFieldValue)} />{' '}
+              <label htmlFor="selectAll">Select all</label>
               <CheckboxGroup
                 id="roles"
                 className={styles.roles}
