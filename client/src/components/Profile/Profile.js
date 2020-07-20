@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { withFormik } from 'formik';
 import { toast } from 'react-toastify';
 import { Field } from 'formik';
@@ -56,14 +56,14 @@ const formikEnhancer = withFormik({
   displayName: 'ProfileForm',
 });
 
-class Profile extends Component {
-  modalProps = {
+const Profile = props => {
+  const modalProps = {
     triggerText: 'Forgot Password?',
   };
 
-  modalContent = (<ForgotPassword user={{ email: '' }} {...this.props} />);
+  const modalContent = <ForgotPassword user={{ email: '' }} {...props} />;
 
-  handleCheckAll = setFieldValue => {
+  const handleCheckAll = setFieldValue => {
     const inputs = document.getElementsByTagName('input');
     const selectAll = document.querySelector('#selectAll');
     const ids = { admin: 0, user: 1, family: 2, friend: 3 };
@@ -80,7 +80,7 @@ class Profile extends Component {
     }
   };
 
-  isAllChecked = () => {
+  const isAllChecked = () => {
     const inputs = document.getElementsByTagName('input');
     const ids = { admin: 0, user: 1, family: 2, friend: 3 };
     let isAllChecked = false;
@@ -95,149 +95,149 @@ class Profile extends Component {
     return isAllChecked;
   };
 
-  render() {
-    document.title = 'User Profile';
-    const {
-      values,
-      touched,
-      errors,
-      handleChange,
-      handleBlur,
-      handleSubmit,
-      isSubmitting,
-      isAdmin,
-      setFieldValue,
-    } = this.props;
+  document.title = 'User Profile';
+  const {
+    values,
+    touched,
+    errors,
+    handleChange,
+    handleBlur,
+    handleSubmit,
+    isSubmitting,
+    isAdmin,
+    setFieldValue,
+  } = props;
 
-    return (
-      <React.Fragment>
-        <h2>Profile</h2>
-        <form onSubmit={handleSubmit}>
-          <TextInput
-            id="firstName"
-            type="text"
-            label="First Name"
-            error={touched.firstName && errors.firstName}
-            value={values.firstName}
-            onChange={handleChange}
-            onBlur={handleBlur}
+  return (
+    <React.Fragment>
+      <h2>Profile</h2>
+      <form onSubmit={handleSubmit}>
+        <TextInput
+          id="firstName"
+          type="text"
+          label="First Name"
+          error={touched.firstName && errors.firstName}
+          value={values.firstName}
+          onChange={handleChange}
+          onBlur={handleBlur}
+        />
+        <TextInput
+          id="lastName"
+          type="text"
+          label="Last Name"
+          error={touched.lastName && errors.lastName}
+          value={values.lastName}
+          onChange={handleChange}
+          onBlur={handleBlur}
+        />
+        <TextInput
+          id="email"
+          type="email"
+          label="Email"
+          autoComplete="username email"
+          error={touched.email && errors.email}
+          value={values.email}
+          onChange={handleChange}
+          onBlur={handleBlur}
+        />
+        <TextInput
+          id="currentPassword"
+          type="password"
+          label="Current Password"
+          autoComplete="current-password"
+          error={touched.currentPassword && errors.currentPassword}
+          value={values.currentPassword}
+          onChange={handleChange}
+          onBlur={handleBlur}
+        />
+        <div className={styles.forgotPassword}>
+          <Modal
+            modalProps={modalProps}
+            modalContent={modalContent}
+            modalButtonClassName={commonStyles.modalLinkButton}
+            {...props}
           />
-          <TextInput
-            id="lastName"
-            type="text"
-            label="Last Name"
-            error={touched.lastName && errors.lastName}
-            value={values.lastName}
-            onChange={handleChange}
-            onBlur={handleBlur}
-          />
-          <TextInput
-            id="email"
-            type="email"
-            label="Email"
-            autoComplete="username email"
-            error={touched.email && errors.email}
-            value={values.email}
-            onChange={handleChange}
-            onBlur={handleBlur}
-          />
-          <TextInput
-            id="currentPassword"
-            type="password"
-            label="Current Password"
-            autoComplete="current-password"
-            error={touched.currentPassword && errors.currentPassword}
-            value={values.currentPassword}
-            onChange={handleChange}
-            onBlur={handleBlur}
-          />
-          <div className={styles.forgotPassword}>
-            <Modal
-              modalProps={this.modalProps}
-              modalContent={this.modalContent}
-              modalButtonClassName={commonStyles.modalLinkButton}
-              {...this.props}
-            />
-          </div>
-          <TextInput
-            id="password"
-            type="password"
-            label="New Password"
-            autoComplete="new-password"
-            error={touched.password && errors.password}
-            value={values.password}
-            onChange={handleChange}
-            onBlur={handleBlur}
-          />
-          <TextInput
-            id="confirmPassword"
-            type="password"
-            label="Confirm Password"
-            autoComplete="new-password"
-            error={touched.confirmPassword && errors.confirmPassword}
-            value={values.confirmPassword}
-            onChange={handleChange}
-            onBlur={handleBlur}
-          />
-          {isAdmin && (
-            <React.Fragment>
-              <h3>Roles</h3>
-              <input
-                id="selectAll"
-                type="checkbox"
-                checked={this.isAllChecked()}
-                onChange={() => this.handleCheckAll(setFieldValue)}
-              />{' '}
-              <label htmlFor="selectAll">Select all</label>
-              <CheckboxGroup
-                id="roles"
-                className={styles.roles}
-                label="Which of these?"
-                value={values.roles}
-                onChange={setFieldValue}
-              >
-                <Field
-                  component={Checkbox}
-                  name="roles"
-                  id="admin"
-                  label="Admin"
-                  value="admin"
-                  defaultChecked={values.roles.includes('admin')}
-                />
-                <Field
-                  component={Checkbox}
-                  name="roles"
-                  id="user"
-                  label="User"
-                  value="user"
-                  defaultChecked={values.roles.includes('user')}
-                />
-                <Field
-                  component={Checkbox}
-                  name="roles"
-                  id="family"
-                  label="Family"
-                  value="family"
-                  defaultChecked={values.roles.includes('family')}
-                />
-                <Field
-                  component={Checkbox}
-                  name="roles"
-                  id="friend"
-                  label="Friend"
-                  value="friend"
-                  defaultChecked={values.roles.includes('friend')}
-                />
-              </CheckboxGroup>
-            </React.Fragment>
-          )}
-          <button type="submit" disabled={isSubmitting} className="btn btn-primary">
-            Submit
-          </button>
-        </form>
-      </React.Fragment>
-    );
-  }
-}
+        </div>
+        <TextInput
+          id="password"
+          type="password"
+          label="New Password"
+          autoComplete="new-password"
+          error={touched.password && errors.password}
+          value={values.password}
+          onChange={handleChange}
+          onBlur={handleBlur}
+        />
+        <TextInput
+          id="confirmPassword"
+          type="password"
+          label="Confirm Password"
+          autoComplete="new-password"
+          error={touched.confirmPassword && errors.confirmPassword}
+          value={values.confirmPassword}
+          onChange={handleChange}
+          onBlur={handleBlur}
+        />
+        {isAdmin && (
+          <React.Fragment>
+            <h3>Roles</h3>
+            {/* eslint-disable jsx-a11y/control-has-associated-label */}
+            <input
+              id="selectAll"
+              type="checkbox"
+              checked={isAllChecked()}
+              onChange={() => handleCheckAll(setFieldValue)}
+            />{' '}
+            {/* eslint-enable jsx-a11y/control-has-associated-label */}
+            <label htmlFor="selectAll">Select all</label>
+            <CheckboxGroup
+              id="roles"
+              className={styles.roles}
+              label="Which of these?"
+              value={values.roles}
+              onChange={setFieldValue}
+            >
+              <Field
+                component={Checkbox}
+                name="roles"
+                id="admin"
+                label="Admin"
+                value="admin"
+                defaultChecked={values.roles.includes('admin')}
+              />
+              <Field
+                component={Checkbox}
+                name="roles"
+                id="user"
+                label="User"
+                value="user"
+                defaultChecked={values.roles.includes('user')}
+              />
+              <Field
+                component={Checkbox}
+                name="roles"
+                id="family"
+                label="Family"
+                value="family"
+                defaultChecked={values.roles.includes('family')}
+              />
+              <Field
+                component={Checkbox}
+                name="roles"
+                id="friend"
+                label="Friend"
+                value="friend"
+                defaultChecked={values.roles.includes('friend')}
+              />
+            </CheckboxGroup>
+          </React.Fragment>
+        )}
+        <button type="submit" disabled={isSubmitting} className="btn btn-primary">
+          Submit
+        </button>
+      </form>
+    </React.Fragment>
+  );
+};
 
 export default formikEnhancer(Profile);
