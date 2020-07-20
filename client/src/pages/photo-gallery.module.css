@@ -47,7 +47,7 @@
 
 .thumbsGrid {
   display: grid;
-  grid-template-columns: 20rem 20rem 20rem;
+  grid-template-columns: 20rem 20rem;
   grid-row-gap: 1.5rem;
 }
 

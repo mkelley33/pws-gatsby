@@ -72,7 +72,7 @@ const Photos = () => {
           hideProgressBar: true,
         });
       });
-  });
+  }, []);
 
   const deletePhoto = id => {
     api.delete(`/photos/${id}`).then(res => {
