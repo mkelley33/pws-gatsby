@@ -1,32 +1,29 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import { navigate } from 'gatsby';
 import { connect } from 'react-redux';
 import api from '../api';
 import { signOutUser } from '../actions';
 
 const withAuthentication = WrappedComponent => {
-  class HOC extends Component {
-    state = {
-      isAuthenticated: false,
-    };
+  const HOC = props => {
+    console.log(props);
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-    componentDidMount() {
+    useEffect(() => {
       api
         .get('/auth/is-authenticated')
         .then(res => {
-          this.setState({ isAuthenticated: true });
+          setIsAuthenticated(true);
         })
         .catch(err => {
-          this.props.signOutUser();
+          props.signOutUser();
           navigate('/sign-in');
         });
-    }
+    }, []);
 
-    render() {
-      if (!this.state.isAuthenticated) return null;
-      return <WrappedComponent isAuthenticated={this.state.isAuthenticated} />;
-    }
-  }
+    if (!isAuthenticated) return null;
+    return <WrappedComponent isAuthenticated={isAuthenticated} {...props} />;
+  };
   return connect(null, { signOutUser })(HOC);
 };
 

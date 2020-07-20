@@ -13,6 +13,7 @@ import styles from './profile.module.css';
 import commonStyles from '@components/common/common.module.css';
 import ForgotPassword from '../ForgotPassword';
 import Modal from '@components/Modal/Modal';
+import withAuthentication from '@components/withAuthentication';
 
 const formikEnhancer = withFormik({
   validationSchema: Yup.object().shape({
@@ -240,4 +241,4 @@ const Profile = props => {
   );
 };
 
-export default formikEnhancer(Profile);
+export default withAuthentication(formikEnhancer(Profile));
