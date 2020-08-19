@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Link } from 'gatsby';
 import classnames from 'classnames';
 import Pagination from 'react-js-pagination';
@@ -22,7 +22,6 @@ const Photos = () => {
   const [photos, setPhotos] = useState([]);
   const [albums, setAlbums] = useState([]);
   const [pageRange, setPageRange] = useState(1);
-  const [perPage, setPerPage] = useState(9);
   const [offset, setOffset] = useState(0);
   const [isAlbumClick, setIsAlbumClick] = useState(false);
   const [albumId, setAlbumId] = useState(null);
@@ -30,14 +29,18 @@ const Photos = () => {
   const [showViewAllPhotos, setShowViewAllPhotos] = useState(false);
   const [totalCount, setTotalCount] = useState(0);
   const [activePage, setActivePage] = useState(0);
+  const perPage = useRef(9);
 
-  const getPhotos = id => {
-    if (isAlbumClick) {
-      return api.get(`/photo-albums/${id}`, { params: { limit: perPage, skip: offset } });
-    } else {
-      return api.get('/photos', { params: { limit: perPage, skip: offset } });
-    }
-  };
+  const getPhotos = useCallback(
+    id => {
+      if (isAlbumClick) {
+        return api.get(`/photo-albums/${id}`, { params: { limit: perPage.current, skip: offset } });
+      } else {
+        return api.get('/photos', { params: { limit: perPage.current, skip: offset } });
+      }
+    },
+    [isAlbumClick, offset]
+  );
 
   const handlePrivateAlbumsClick = () => {
     api.get('/photo-albums/', { params: { isPublic: false } }).then(response => {
@@ -63,7 +66,7 @@ const Photos = () => {
         const pageCount = Math.ceil(res[0].data.totalCount / perPage);
         setPhotos(res[0].data.photos);
         setTotalCount(res[0].data.totalCount);
-        setPageRange(pageCount <= 9 ? pageCount : 9);
+        setPageRange(pageCount <= perPage.current ? pageCount : perPage.current);
         setAlbums(res[1].data);
       })
       .catch(err => {
@@ -72,16 +75,12 @@ const Photos = () => {
           hideProgressBar: true,
         });
       });
-  }, []);
+  }, [getPhotos]);
 
   const deletePhoto = id => {
+    const photosFiltered = photos.filter(photo => photo._id !== id);
+    setPhotos(photosFiltered);
     api.delete(`/photos/${id}`).then(res => {
-      const photoIndex = photos.findIndex(photo => {
-        return photo._id === id;
-      });
-      const photos = [...photos];
-      photos.splice(photoIndex, 1);
-      setPhotos(photos);
       toast.success('You successfully deleted the photo', {
         position: toast.POSITION.TOP_CENTER,
         hideProgressBar: true,
@@ -90,14 +89,16 @@ const Photos = () => {
   };
 
   const deleteAlbum = id => {
+    const albumsFiltered = albums.filter(album => {
+      return album._id !== id;
+    });
+    setAlbums(albumsFiltered);
     api.delete(`/photo-albums/${id}`).then(res => {
-      const albumIndex = albums.findIndex(album => {
-        return album._id === id;
-      });
-      const albums = [...albums];
-      albums.splice(albumIndex, 1);
-      setAlbums(albums);
       handleViewAllPhotosClick();
+      toast.success('You successfully deleted the album', {
+        position: toast.POSITION.TOP_CENTER,
+        hideProgressBar: true,
+      });
     });
   };
 
@@ -119,18 +120,17 @@ const Photos = () => {
   };
 
   const handlePageChange = pageNumber => {
-    const offset = (pageNumber - 1) * perPage;
+    const offset = (pageNumber - 1) * perPage.current;
     setOffset(offset);
-    setActivePage(pageNumber, () => {
-      getPhotos(albumId).then(res => {
-        if (res.data && res.data.photos && res.data.photos[0] && res.data.photos[0].photos) {
-          setPhotos(res.data.photos.map(photo => photo.photos));
-          setTotalCount(res.data.totalCount);
-        } else {
-          setPhotos(res.data.photos);
-          setTotalCount(res.data.totalCount);
-        }
-      });
+    setActivePage(pageNumber);
+    getPhotos(albumId).then(res => {
+      if (res.data && res.data.photos && res.data.photos[0] && res.data.photos[0].photos) {
+        setPhotos(res.data.photos.map(photo => photo.photos));
+        setTotalCount(res.data.totalCount);
+      } else {
+        setPhotos(res.data.photos);
+        setTotalCount(res.data.totalCount);
+      }
     });
   };
 
@@ -185,7 +185,7 @@ const Photos = () => {
           )}
           {albums &&
             albums.map(album => {
-              if (!album.photos.length) return;
+              if (!album.photos.length) return null;
 
               return (
                 <React.Fragment key={album._id}>
@@ -248,7 +248,7 @@ const Photos = () => {
               activeClass={styles.activePage}
               itemClass={styles.paginationItem}
               disabledClass={styles.disabled}
-              itemsCountPerPage={perPage}
+              itemsCountPerPage={perPage.current}
               totalItemsCount={totalCount}
               pageRangeDisplayed={pageRange}
               onChange={handlePageChange}

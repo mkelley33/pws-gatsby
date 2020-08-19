@@ -6,7 +6,6 @@ import { signOutUser } from '../actions';
 
 const withAuthentication = WrappedComponent => {
   const HOC = props => {
-    console.log(props);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
 
     useEffect(() => {
