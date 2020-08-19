@@ -108,14 +108,13 @@ const Photos = () => {
     setActivePage(1);
     setIsAlbumClick(true);
     setAlbumId(id);
-    setShowViewAllPhotos(true, () => {
-      getPhotos(id).then(res => {
-        const pageCount = Math.ceil(res.data.totalCount / perPage);
-        setPhotos(res.data.photos.map(photo => photo.photos));
-        setTotalCount(res.data.totalCount);
-        setPageRange(pageCount <= 9 ? pageCount : 9);
-        setAlbumName(res.data.photos[0].name);
-      });
+    setShowViewAllPhotos(true);
+    getPhotos(id).then(res => {
+      const pageCount = Math.ceil(res.data.totalCount / perPage);
+      setPhotos(res.data.photos.map(photo => photo.photos));
+      setTotalCount(res.data.totalCount);
+      setPageRange(pageCount <= perPage.current ? pageCount : perPage.current);
+      setAlbumName(res.data.photos[0].name);
     });
   };
 
